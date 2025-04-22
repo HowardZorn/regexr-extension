@@ -4,16 +4,6 @@
 	<meta charset="UTF-8">
 	<title>RegExr: Learn, Build, &amp; Test RegEx</title>
 
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-FS551ZDYMX"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'G-FS551ZDYMX');
-	</script>
-
 	<!-- source for this is in ./assets/workers/RegExWorker.js -->
 	<script id="regexWorker" type="javascript/worker">
 		onmessage=function(e){postMessage("onload");var t,s,n,a=e.data,i=a.text,d=a.tests,l=a.mode,r=new RegExp(a.pattern,a.flags),o=[];if("tests"===l)for(var g=0,x=d.length;g<x;g++){let e=d[g];i=e.text,r.lastIndex=0,t=r.exec(i),o[g]=t?{i:t.index,l:t[0].length,id:e.id}:{id:e.id}}else for(;t=r.exec(i);){s===r.lastIndex&&(n={id:"infinite",warning:!0},++r.lastIndex),s=r.lastIndex;var f=t.reduce(function(e,t,s){return(0===s||e.push({s:t}))&&e},[]);if(o.push({i:t.index,l:t[0].length,groups:f}),!r.global)break}postMessage({error:n,matches:o,mode:l})};
@@ -116,35 +106,6 @@
 							<li><b>Undo</b> &amp; <b>Redo</b> with {{getCtrlKey()}}-Z / Y in editors.</li>
 							<li>Search for &amp; rate <b>Community Patterns</b>.</li>
 						</ul>
-					</div>
-					<div class="hello">
-						<div class="native-js">
-							<a href="#native_link#" class="native-flex">
-								<style>
-									.native-js {
-										background: linear-gradient(-30deg, #native_bg_color#E5, #native_bg_color#E5 45%, #native_bg_color# 45%) #fff;
-									}
-
-									.native-details {
-										color: #native_color# !important;
-									}
-
-									.native-details:hover {
-										color: #native_color_hover# !important;
-									}
-								</style>
-								<div class="native-main">
-									<img class="native-img" src="#native_logo#">
-									<div class="native-details">
-										<span class="native-company">Sponsored by #native_company#</span>
-										<span class="native-desc">#native_desc#</span>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="noad">
-							<b>Want to support RegExr?</b> Consider disabling your ad-blocker for this domain. We'll show a non-intrusive, dev-oriented ad in this area.
-						</div>
 					</div>
 				</div>
 

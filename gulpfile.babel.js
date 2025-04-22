@@ -2,17 +2,16 @@
 const gulp = require("gulp");
 const inject = require("gulp-inject");
 const rename = require("gulp-rename");
-const template = require("gulp-template");
-const sass = require("gulp-sass");
-sass.compiler = require("sass");
+const sass = require('gulp-sass')(require('sass'));
 const cleanCSS = require("gulp-clean-css");
 const htmlmin = require("gulp-htmlmin");
 const svgstore = require("gulp-svgstore");
 const svgmin = require("gulp-svgmin");
-const autoprefixer = require("gulp-autoprefixer");
+const postcss = require("gulp-postcss");
+const autoprefixer = require('autoprefixer');
 const rollup = require("rollup").rollup;
-const babel = require("rollup-plugin-babel");
-const terser = require("rollup-plugin-terser").terser;
+const babel = require("@rollup/plugin-babel");
+const terser = require("@rollup/plugin-terser");
 const replace = require("rollup-plugin-replace");
 const browser = require("browser-sync");
 const Vinyl = require("vinyl");
@@ -22,6 +21,8 @@ const Readable = require("stream").Readable;
 const createHash = require("crypto").createHash;
 const fs = require("fs");
 const basename = require("path").basename;
+
+import template from 'gulp-template';
 
 let js_file = "regexr.js";
 let css_file = "regexr.css";
@@ -88,7 +89,6 @@ gulp.task("js", () => {
 		moduleContext: {
 			"./dev/lib/codemirror.js": "window",
 			"./dev/lib/clipboard.js": "window",
-			"./dev/lib/native.js": "window"
 		},
 		plugins,
 		onwarn: (warning, warn) => {
@@ -296,7 +296,7 @@ function buildSass(theme) {
 	};
 	return src
 		.pipe(sass().on("error", sass.logError))
-		.pipe(autoprefixer({remove: false}))
+		.pipe(postcss([autoprefixer({remove: false})]))
 		.pipe(cleanCSS());
 }
 
